@@ -1,9 +1,32 @@
 <ul class="todo-list">
-  <li>
-    <div class="view">
-      <input class="toggle" type="checkbox" />
-      <label></label>
-      <button class="destroy"></button>
-    </div>
-  </li>
+  <ng-container *ngFor="let l of (todos$ | async)?.todos;let i =index">
+    <li
+      *ngIf="((todos$ | async)?.filterMode=='Active' ||  (todos$ | async)?.filterMode=='All')&& !l.completed  && editIndex !==i"
+      class=''>
+      <div class="view">
+        <input class="toggle" type="checkbox" (click)='completeTask(i)' />
+        <label (dblclick)='editTodo(l,i)'>{{l.text }}</label>
+        <button class="destroy" (click)='removeItem(i)'></button>
+      </div>
+    </li>
+    <li
+      *ngIf="((todos$ | async)?.filterMode=='All' ||  (todos$ | async)?.filterMode=='Completed') && l.completed && editIndex !==i"
+      class='completed'>
+      <div class="view">
+
+        <input class="toggle" type="checkbox" [checked]='l.completed==true' (click)='completeTask(i)' />
+        <label (dblclick)='editTodo(l,i)'>{{l.text }}</label>
+        <button class="destroy" (click)='removeItem(i)'></button>
+      </div>
+    </li>
+    <li *ngIf='editIndex ===i' class='editing'>
+      <div class="view">
+        <input class="toggle" type="checkbox"  />
+        <label>{{newText}}</label>
+        <button class="destroy" (click)='removeItem(i)'></button>
+
+      </div>
+      <input class='edit' [(ngModel)]='newText' (keydown)='textchange($event,i)'>
+    </li>
+  </ng-container>
 </ul>

@@ -11,16 +11,17 @@ export const removeTodo = createAction(
   props<{ index: number }>(),
 );
 
-export const editTodo = createAction(
-  '[Todos] Edit Todo',
-  props<{ index: number }>(),
-);
+
 
 export const updateTodo = createAction(
   '[Todos] Update Todo',
   props<{ index: number, text: string }>(),
 );
 
+export const countTodo = createAction(
+  '[Todos] Update Todo',
+ 
+);
 export const toggleCompleted = createAction(
   '[Todos] Toggle Completed',
   props<{ index: number }>(),
@@ -37,4 +38,8 @@ export const changeFilterMode = createAction(
 
 export const clearCompleted = createAction(
   '[Todos] Clear Completed',
+);
+export const getSelected = createAction(
+  '[Todos] Get Selected',
+  props<{ mode: string }>(),
 );

@@ -27,10 +27,12 @@ export class TodosService {
     this.store.dispatch(TodoActions.removeTodo({ index }));
   }
 
-  toggleComplete(index: number): void {
+  toggleCompleted(index: number): void {
     this.store.dispatch(TodoActions.toggleCompleted({ index }));
   }
-
+  getSelected(mode: string): void {
+    this.store.dispatch(TodoActions.getSelected({ mode }));
+  }
   toggleAllCompleted(): void {
     this.store.dispatch(TodoActions.toggleAllCompleted());
   }
